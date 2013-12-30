@@ -1,0 +1,4 @@
+SIDDB = @prefix@/share/siddb
+HVSC_BASE = 
+SIDPLAY = sidplay
+SIDPLAY_ARGS = "-f44100 -16"

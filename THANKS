@@ -1,0 +1,21 @@
+sidtools THANKS file
+====================
+
+Per Bolmstedt <tomten@C64.org> wrote the original Perl CGI version of
+sid search, on which search2list is based (not the code, but the
+concept).  He's also helped with suggestions for various things.
+
+Simon Kågedal <sika8225@csd.uu.se> for suggesting I include getopt.c,
+instead of using my own ugly argument parsing for systems without
+glibc. 
+
+LaLa <LaLa@C64.org> has reported problems with running sidtools under
+Solaris.
+
+Yuuki NINOMIYA <gm@smn.enjoy.ne.jp> for writing parsecfg and choosing
+the GNU GPL as license for it.  That saved me some work.
+
+Goetz Waschk for reporting a bug.
+
+All the great composers who made all the music that these tools are
+supposed to be helpful in playing.

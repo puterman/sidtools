@@ -1,0 +1,60 @@
+README for sidtools
+===================
+
+What is it?
+-----------
+
+sidtools is a collection of small tools to be used with sids, i.e. 
+files with music data that have been extracted ("ripped") from C-64
+programs.  They can be played on your Unix system by a program called
+SidPlay.  sidtools lets you create playlists, manually or
+automatically, and play them.  
+
+Home page
+---------
+
+http://user.tninet.se/~uxm165t/sidtools.html
+
+Portability notes
+-----------------
+
+My personal system is GNU/Linux ix86, and I don't think there should
+be a problem compiling on any such system.  I've also compiled
+sidtools under HP-UX (with gcc+glibc).  Other compilers and C
+libraries could give you errors.  If you have any problems, please
+send me an email.  I don't have access to any other OSes than
+GNU/Linux, HP-UX, GNU/Hurd and Solaris, so if you successfully compile
+sidtools on some other architecture, especially with another compiler
+and C library, please write me an email telling me about it.  I've
+just started fiddling with automake and autoconf, so if you're
+experiencing any problems, I'd really like to hear about them.
+
+Requirements
+------------
+
+You'll still need SidPlay and a bunch of sids for this package to be
+of any use, of course.
+
+Author
+------
+
+sidtools is being developed by Linus Åkerlund <uxm165t@tninet.se>. 
+
+Installation
+------------
+
+Please see the file INSTALL for simple installation instructions, and
+the texinfo documentation for a more thorough description of the
+compilation and installation.
+
+Problems
+--------
+
+If you have any problems with sidtools, please tell me about it and
+I'll see what I can do about it.  A problem that I've encountered is
+that corrupt sids can make makelist behave strangely, which in turn
+makes search2list behave strangely, as the database file looks weird.
+If search2list doesn't behave as you think it should, have a look at
+the database file and see if you can see anything in it that looks
+weird.  I've added some checks to makelist, but I can't be sure that
+they'll fix all possible errors.

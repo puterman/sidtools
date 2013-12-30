@@ -1,0 +1,629 @@
+This is sidtools.info, produced by Makeinfo version 3.12h from
+sidtools.texinfo.
+
+INFO-DIR-SECTION Miscellaneous
+START-INFO-DIR-ENTRY
+* sidtools: (sidtools).         Creating playlists for Sidplay
+END-INFO-DIR-ENTRY
+
+   This manual describes sidtools, a set of tools to create and play
+playlists for SidPlay.
+
+   Copyright (C) 1998-2000 Linus A*kerlund
+
+   Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+   Permission is granted to copy and distribute modified versions of
+this manual under the conditions for verbatim copying, and provided
+that the entire resulting derived work is distributed under the terms
+of a permission notice identical to this one.
+
+   Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions, except that this permission notice may be stated in a
+translation approved by the Free Software Foundation.
+
+
+File: sidtools.info,  Node: Top,  Next: What is sidtools,  Up: (dir)
+
+   Sidtools is a set of utilities for creating playlists for SidPlay,
+and also to make SidPlay play them.  It contains four programs:
+makelist, which creates a database file out of the sids on your system,
+search2list, which lets you search this database file and output
+playlists, sidlist, which lets you play these and other playlists and
+sidplayo, which is a wrapper for SidPlay.
+
+   This manual documents version 1.0 of sidtools.
+
+* Menu:
+
+* What is sidtools::
+* Installing sidtools::
+* Using sidtools::
+* Command Reference::
+* Database Format::
+
+
+File: sidtools.info,  Node: What is sidtools,  Next: Installing sidtools,  Prev: Top,  Up: Top
+
+What is sidtools
+****************
+
+   sidtools is a bunch of small tools to be used with Sidplay on Linux
+systems.  It should work under other Unix systems as well. If it
+doesn't, please write an email and tell me about your problems.
+`sidtools' lets you create a database of your sids, which can be
+searched for keywords to create playlists.  You can also create
+playlists manually or use a directory as a playlist.  Read the rest of
+this document to find out more about the details.
+
+What is Sidplay?
+================
+
+   `sidplay' is a program that lets your Linux/Unix system play sids,
+i.e. music files that have been extracted from C-64 programs.  The
+Linux/Unix version is command line based, which gives you all the
+advantages of running a Unix system, e.g. you can pipe data to it and
+from it, which `sidtools' utilize.  If you want to know more about
+`Sidplay', have a look at
+<http://www.geocities.com/SiliconValley/Lakes/5147/>, the Sidplay home
+page.  You can also use other sidplayers, like `VICE' (very
+experimental) and LittleSID, but I haven't tested that much.
+
+What is the HVSC?
+=================
+
+   `HVSC', the High Voltage SID Collection, is a huge collection of
+sids.  Version 3.7 contains more than 12000 sid files, many of which
+contain more than one subtune.  If you're interested in listening to
+C-64 music, you should have a look at <http://www.hvsc.c64.org/>.
+
+Why use sidtools?
+=================
+
+   If you, like me, dislike graphical user interfaces, you probably
+don't want to use any of the GUI frontends for `Sidplay'.  `sidlist'
+lets you create playlists, so that you don't have to issue a command
+each time you want to change the sid you're listening too.  This can be
+very convenient if you want to listen to sids while working on something
+else.  All you have to do is create a playlist (which `search2list' can
+do automatically for you, if you don't want to create your own
+playlists manually) and launch `sidlist'.  While writing this, I'm
+listening to an automatically created playlist with all the songs from
+HVSC that have the copyright year 1983.  Nice, huh?  `sidlist' can also
+play random tunes.
+
+
+File: sidtools.info,  Node: Installing sidtools,  Next: Using sidtools,  Prev: What is sidtools,  Up: Top
+
+Installing sidtools
+*******************
+
+Getting sidtools
+================
+
+   You can find the latest version of `sidtools' at
+<http://user.tninet.se/~uxm165t/sidtools.html>
+
+Installing sidtools
+===================
+
+   Move the downloaded archive (`sidtools-VERSION.tar.gz') to where you
+usually put your source code archives (e.g. `/usr/local/src/') and
+unpack it with:
+
+     tar -xzvf sidtools-VERSION.tar.gz
+
+This creates the directory `sidtools-VERSION'.  Move into that
+directory and configure it for your system.
+
+   Just follow these simple steps and everything should work out nicely:
+   * Type `./configure'.  This will configure `sidtools' for your
+     system.
+
+   * Now type `make'.  This will compile and link the C programs.
+
+   * To install the programs and the documentation, type `make install'.
+
+   * If you don't like `sidtools', type `make uninstall' to uninstall
+     it, and send me an email and tell me why you don't like it.  My
+     email address is <uxm165t@tninet.se>.
+
+
+File: sidtools.info,  Node: Using sidtools,  Next: Command Reference,  Prev: Installing sidtools,  Up: Top
+
+Using sidtools
+**************
+
+makelist
+========
+
+   `makelist' is a program you'll only need to use once (until you
+upgrade your sid collection), so we might as well do that at once.  What
+it does is that it goes through your sid collection and creates a
+database by extracting some information from the sids themselves (name
+of the author, title of song and copyright) and add the path to the
+song.  On my system the sids live in the directory
+`/usr/local/games/C64Music', so I'd type
+
+     makelist /usr/local/games/C64Music -o DB_NAME
+
+DB_NAME is the name of the database file.  `makelist' will tell you
+which directories it's working on, and it'll probably take a few
+minutes for it to finish.  If you just type
+
+     makelist PATH_TO_SIDS PATH_TO_MORE_SIDS
+
+the database will by default be written to the file specified in the
+configuration file.  If there is no configuration file, it will instead
+be written to a file in your home directory called `.sidtoolsdb'.  And
+as the example shows, you can also specify more than one directory
+where you keep your sids.  This can be handy if you don't have all your
+sids under one directory.  Of course, you could then tell makelist to
+search from the root directory, but that would probably take lots of
+extra time, so this is a much better solution if you, like me, have the
+HVSC installed somewhere under /usr and then have some other sids in
+your home directory.
+
+   `makelist' will also write a file in your home directory called
+`.sidtoolsrc', which is the configuration file for sidtools.  This file
+has the following fields:
+
+   * `SIDDB': This is the path to the sid database which `makelist'
+     creates.
+
+   * `HVSC_BASE': The root directory of the High Voltage Sid Collection
+     (or, if you don't have it, the root directory to your SID
+     collection, whatever it might be).
+
+   * `SIDPLAY': The name of the binary that you use to play SIDs, e.g.
+     `sidplay'.
+
+   * `SIDPLAY_ARGS': The arguments you want to pass to the sidplayer by
+     default.
+
+   So in the example above, `PATH_TO_SIDS' should be the root directory
+of your HVSC installation.
+
+   The option `-n' (or `--no-rc') makes `makelist' not write the rc
+file (~/.sidtoolsrc).  This can be useful if you want to keep more than
+one database.
+
+   A good idea, if you get new sids on a regular basis (e.g. if you rip
+them yourselves), is to let a cron job run `makelist' every day.
+
+   So, now that you have a database, you might as well start using it!
+
+search2list
+===========
+
+   `search2list' uses the database you've just created to create
+playlists for you.  What you do is that you provide it with search
+strings, that will be searched for in the author, title, copyright,
+number of songs, default start song, load address, init address, play
+address and/or file size fields. In the author, title and copyright
+fields you can use regular expressions as keywords, for more flexible
+searches.
+
+   When given the `--extra-information' or `-e' argument `search2list'
+gives you all the information from the sid header, like title, author,
+copyright, init and play addresses etc. You can also use the
+`--stil-information' or `-z' option to get STIL info about the tune.
+This output can't be used as a playlist.
+
+   Here's an example to get you started:
+
+     search2list --author=hubbard --title=commando
+
+This search specifies that the string `hubbard' should be in the author
+field and that the string `commando' should be in the title field.
+This just gives me one hit, Rob Hubbard's Commando tune (of course).
+The path of the sids found will be printed to the screen, which isn't a
+problem.  If you want to capture those in a file (which can be used as
+a playlist), just type something like
+
+     search2list --copyright=1982 > 1982-sids
+
+This will search the copyright fields for the string `1982', which will
+of course return all the sids that were copyrighted in 1982, _and_ it
+will put the paths to these sids in the file `1982-sids', which can now
+be used as a playlist.  If you want to tell `search2list' which
+database file to use explicitly, you can do that too on the command
+line:
+
+     search2list --database=my_database -a hubbard -c 1985 > hubbard-85-sids
+
+This will search the database `my_database' for all the sids that
+`hubbard' composed and that were copyrighted in 1985, and put them in
+the file `hubbard-85-sids'.  This example also illustrates the short
+Unix-style versions of the option, where `-a' does the same thing as
+`--author' and `-c' does the same thing as `--copyright'.
+
+     search2list --author=hubbard --start-tune=2 >hubbard-start-2
+
+This is just an example of the more unusual search options.  The
+`--start-tune=2' argument searches for sid files where the default
+start song is number 2.  The other more exotic options are:
+
+   * -number-of-tunes=NUMBER searches for the specified number of songs
+
+   * -number-of-tunes=">NUMBER" searches for sids with at least this
+     number of subtunes
+
+   * -number-of-tunes="<NUMBER" searches for sids with at most this
+     number of subtunes
+
+   * -load-address=HEX_NUMBER searches for the specified load address
+
+   * -load-address="<HEX_NUMBER" searches for the sids with at least the
+     specified load address
+
+   * -load-address=">HEX_NUMBER" searches for sids with at most the
+     specified load address
+
+   * -init-address=HEX_NUMBER searches for the specified init address
+
+   * -init-address="<HEX_NUMBER" searches for sids with at least the
+     specified init address
+
+   * -init-address=">HEX_NUMBER" searches for sids with at most the
+     specified init address
+
+   * -play-address=HEX_NUMBER searches for the specified play address
+
+   * -play-address="<HEX_NUMBER" searches for sids with at least the
+     specified play address
+
+   * -play-address=">HEX_NUMBER" searches for sids with at most the
+     specified play address
+
+   * -file-size=NUMBER searches for the specified file size
+
+   * -file-size=">NUMBER" searches for sids with this minimum file size
+
+   * -file-size="<NUMBER" searches for sids with this maximum file size
+
+`search2list' doesn't output its playlists sorted in alphabetical order
+(but rather in the internal order of the file system).  If you want the
+output to be sorted, just pipe the list through the command sort, like
+this:
+     search2list -a "jeroen tel|orcan" --file-size="<5000" | sort
+
+This will find all sids, composed by Jeroen Tel or Orcan that are at
+most 5000 bytes long and display them in alphabetical order.  Of course
+only the path names will be sorted, so they will primarily be sorted by
+directory, and secondarily by file name.  If you absolutely want to have
+the songs sorted by title, you should have a look at commands like cut,
+awk, sed etc.
+
+   Here's another example of using regular expressions:
+
+     search2list --author="hubbard|jeroen tel" --copyright="1984|1988"
+
+This will give you the songs composed by Rob Hubbard or Jeroen Tel,
+copyrighted in 1984 or 1986.  The type of regular expressions are the
+ones that are provided by the GNU C library.  I won't try to teach you
+about regular expressions here, so you'll have to try to find that info
+elsewhere, if you want to use them, but don't know anything about them.
+I'm no regexp wizard myself, but feel free to ask me if there's anything
+you want to know.  NB: all matchings are case insensitive, so you don't
+have to do stuff like `search2list -a "[Gg]alway"'.
+
+   Okay, time to use these playlists for something!
+
+sidlist
+=======
+
+   At last we'll be able to use the playlists.  The easy way to use
+`sidlist' is to place yourself in the directory where you keep your
+playlists (like `1982-sids' and `hubbard-85-sids' from the above
+examples) and type something like
+
+     sidlist hubbard-85-sids
+
+This will start playing the sids in the `hubbard-85-sids'-list,
+printing out the usual `sidplay' info about the songs on the screen as
+it progresses through the list.  By default `sidlist' keeps playing
+each song for 3 minutes.  You can of course change this, by specifying
+how long you want each sid to be played (in seconds):
+
+     sidlist 1982-sids --time=120
+
+This will play all the songs in the `1982-sids'-list, playing 2 minutes
+(120 seconds) of each sid.
+
+   You can always skip to the next sid in the playlist by pressing
+`ENTER'.
+
+   Of course you can also connect `search2list' and `sidlist' with a
+pipe, so that you don't have to create playlists as files.  Just type
+something like
+
+     search2list -a hörnell | sidlist - --time=300
+
+The `-' argument to `sidlist' tells it to take its input from stdin,
+which in this case is the output from `search2list'.  Each tune will be
+played for five minutes.  (_WARNING!_ Don't try that exact command
+line, because it'll play the songs composed by Karl Hörnell, and, well,
+they might cause severe mental damage... I take no responsibility if
+you try the above command line and go deaf or insane!)
+
+   To play random tunes, you can type
+
+     sidlist --random
+
+This will make sidlist pick random tunes from the database you created
+with `makelist' and play them.
+
+   If you don't want to start from the beginning of the list you can
+specify which song to start from with the `--start-tune' switch.
+Example:
+
+     sidlist greatest_hits_list --start-tune=10
+
+Here's another example:
+
+     search2list -a "jeroen tel" | sidlist - --time=120 --start-tune=10
+
+This will play all songs by Jeroen Tel, except for the first 10, for
+two minutes each.
+
+   If you want to stop `sidlist', just press `C-c'.
+
+   With the `--delay' argument you can make sidlist take a pause
+between tunes.  This can be handy if sidplay isn't killed quickly
+enough, so that you get error messages about sidplay not being able to
+open the audio device.  You can specify how many seconds you want it to
+pause.  The default is 0.
+
+     sidlist --random --delay=2
+
+This will play random tunes with 2 seconds of silence between tunes.  I
+added the `--delay' option because I had problems when using the OSS
+sounddrivers (the ones shipped with the Linux kernel), but since I
+switched to ALSA (<http://www.alsaproject.org>) I don't need this
+anymore.
+
+   With the `--database' (or `-b') option you can specify which
+database file you want to use with sidlist (for playing random tunes).
+Here's an exampel:
+
+     sidlist --random --database=my_database
+
+   This will not use the default database specified in `.sidtoolsrc',
+but instead use the file `my_database'.
+
+   If you want to pass a certain set of arguments to the sidplayer
+(which is usually Michael Schwendt's SidPlay), use `--args'.  Here's an
+example of a situation where this can be useful:
+
+     search2list -a taki | sidlist --args=-ns -
+
+   Here `search2list' will find all the tunes by Taki and they will be
+piped to `sidlist', which will play them by using an external
+sidplayer.  The arguments `-ns' will be given to that sidplayer with
+every song that is played from the playlist.  If that external
+sidplayer is SidPlay, the `-ns' argument means that it should simulate
+the use of the newer 8580 SID chip, instead of the default 6581 one.
+So what the above example does is that it plays the tunes by Taki with
+8580 emulation (which sounds better than the default 6581 emulation).
+
+   All the options, `--random, --delay, --time-to-wait, --database,
+--args' and `--start-tune' can also be written in the old Unix way, as
+`-r, -d, -t, -b, -a' and `-s'.  Here's an example:
+
+     sidlist -r -d 2 -s 3 -t 100
+
+You can also use a directory as a playlist.  If I want to listen to all
+the songs by Rob Hubbard, I'd type something like
+
+     sidlist /usr/local/games/C64Music/Hubbard_Rob
+
+Command line arguments to the sidplayer can also be used in playlists.
+Open the playlist with a text editor and add a '@' after an entry, and
+then type in the command line arguments for that song after the '@'.
+An example: let's say you have a list that consists of these two lines:
+
+     /usr/X11/games/C64Music/Hubbard_Rob/Action_Biker.sid.gz
+     /usr/X11/games/C64Music/Yip/Uuno_Turhapuro.sid.gz
+
+If you wanted to listen to the second track of Uuno_Turhapuro, instead
+of the first one, which is the default, you'd have to add the argument
+'-o2' (if you're using Sidplay), like this:
+
+     /usr/X11/games/C64Music/Hubbard_Rob/Action_Biker.sid.gz
+     /usr/X11/games/C64Music/Yip/Uuno_Turhapuro.sid.gz@-o2
+
+Simple, isn't it?  You can of course give several arguments on the same
+line in this way, for example:
+
+     /usr/X11/games/C64Music/Hubbard_Rob/Action_Biker.sid.gz
+     /usr/X11/games/C64Music/Yip/Uuno_Turhapuro.sid.gz@-o2 -f44100 -16 -s
+
+sidplayo
+========
+
+   `sidplayo' can be used just like `sidplay'.  It'll return you to the
+prompt, though, so that you can do other things at the same console.
+To change sid, you just typ `sidplayo' followed by the name of the sid
+you wish to listen to.  If you just want to stop it, just type
+`sidplayo'.
+
+
+File: sidtools.info,  Node: Command Reference,  Next: Database Format,  Prev: Using sidtools,  Up: Top
+
+Command reference
+*****************
+
+   Here's a quick guide to the usage of `sidtools':
+
+     makelist <dirs> [-n|--no-rc] [ -o <db_file> ]
+
+Creates a database file by analyzing the sids in `dirs' (as many as you
+want) and subdirectories.  If you don't specify a database file, it
+will be saved as `.sidtoolsdb' in your home directory.  The first
+argument will also be written to your `.sidtoolsrc' as the root of your
+HVSC (High Voltage Sid Collection), and will be used by `search2list',
+if you tell it to give you STIL information.  `-n' or `--no-rc' means
+that the rc file (`~/.sidtoolsrc') won't be created/written.
+
+     sidplayo [args] [sid_file]
+
+Plays the 'sid_file', and passes the arguments (args) to Sidplay.  Just
+typing `sidplayo' at the shell prompt stops playing the current sid (or
+does nothing, if no sid is playing).
+
+     sidlist [option] <list | dir | - >
+
+Plays the tunes in the playlist `list' or in the directory `dir' or, if
+`-' is given as argument, the playlist that it gets from standard
+input.  The options are:
+   * -h or -help: Shows usage information.
+
+   * -r or -random: Plays random tunes
+
+   * -s or -start-tune=NUMBER: Starts playing tune NUMBER from the
+     playlist.
+
+   * -t or -time-to-wait=SECONDS: Plays each tune for SECONDS seconds.
+
+   * -d or -delay=SECONDS: Waits SECONDS seconds between tunes.
+
+   * -a or -args=ARGUMENTS: Passes ARGUMENTS to the sidplayer.
+
+   * -b or -database=DATABASE_FILE: specifies that you want to use
+     DATABASE_FILE instead of the default database file.
+
+   You can always skip to the next tune in the playlist by pressing
+`ENTER'.
+
+     search2list [-d<db_file>] <options>
+
+Searches the database created by makelist.  You must use at least one
+of the following search options:
+   * -author=REGEXP
+
+   * -title=REGEXP
+
+   * -copyright=REGEXP
+
+   * -number-of-tunes=NUMBER
+
+   * -number-of-tunes=">NUMBER"
+
+   * -number-of-tunes="<NUMBER"
+
+   * -start-tune=NUMBER
+
+   * -start-tune="<NUMBER"
+
+   * -start-tune=">NUMBER
+
+   * -load-address=HEX_NUMBER
+
+   * -load-address="<HEX_NUMBER"
+
+   * -load-address=">HEX_NUMBER"
+
+   * -init-address=HEX_NUMBER
+
+   * -init-address="<HEX_NUMBER"
+
+   * -init-address=">HEX_NUMBER"
+
+   * -play-address=HEX_NUMBER
+
+   * -play-address="<HEX_NUMBER"
+
+   * -play-address=">HEX_NUMBER"
+
+   * -file-size=NUMBER
+
+   * -file-size=">NUMBER"
+
+   * -file-size="<NUMBER"
+
+The argument `--extra-information' (or `-e') doesn't give you a
+playlist, but all the info about the tunes that match the search
+criteria.  The argument `--stil-information' (or `-z') also displays
+STIL info about the tunes.
+
+   Note: You have to quote the arguments to `file-size',
+`number-of-tunes', `play-address', `init-address', `load-address' and
+`start-tune' if you want to use `<' or `>'.  Otherwise, the shell will
+think you're trying to redirect stdin or stdout.  Example:
+     search2list --file-size=">7000"
+
+
+File: sidtools.info,  Node: Database Format,  Prev: Command Reference,  Up: Top
+
+Database Format
+***************
+
+   The database that is created by `makelist' is just a plain text
+file.  The format might change in future versions to be identical to
+that used in Tomten's Sid Search by Per Bolmstedt (<tomten@C64.org>),
+but I'm quite content with it, after the changes made for version
+0.4.5.  Per's database contains both the information from the sid
+headers and from the STIL text file.  The `sidtools' database has the
+same information, but the STIL info is in another format.
+
+   An entry for one tune consists of two lines: one for the info from
+the sid header and one for the STIL info.  If there isn't a STIL entry
+for a tune, the STIL line in the database is empty.
+
+   The sid header lines consists of ten fields, separated by @
+characters.  All the info is taken directly from the headers of the
+sids themselves.  The fields are:
+   * Song title.
+
+   * Composer.
+
+   * Copyright information.  The copyright year and the copyright
+     holder.
+
+   * Path to the tune.  This will of course vary from system to system,
+     depending on where the sid collection is in the file system.
+
+   * Number of songs in the sid file.
+
+   * Default song.  This is the number of the song that will be played
+     unless you explicitly tell `sidplay' to play some other song with
+     the `-o' option.
+
+   * Load address (hexadecimal).  This is the address where the data
+     should be loaded in the C-64's memory.
+
+   * Init address (hexadecimal).  This is the address where the
+     initialization routine is.
+
+   * Play address (hexadecimal).
+
+   * File size of the sid (in bytes).
+
+   The line also ends with a @ character.
+
+   The STIL lines consist of just one field: the whole STIL entry.  The
+newline characters (0x0a) have been replaced by '}', so that the whole
+entry can fit on one line.  The carriage return characters (0x0d) have
+been replaced by space characters.  When the STIL field is parsed by
+`search2list', the '}' characters are replaced by newlines, so
+`search2list' prints out the STIL entries exactly as they are written
+in STIL.txt.  This is sick and should be changed. :-)
+
+   The first line of the database file contains the total number of
+sids in the database, which is used for the random routine in `sidlist'.
+
+
+
+Tag Table:
+Node: Top1032
+Node: What is sidtools1655
+Node: Installing sidtools3896
+Node: Using sidtools5003
+Node: Command Reference17975
+Node: Database Format20976
+
+End Tag Table

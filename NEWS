@@ -1,0 +1,230 @@
+News in 1.0.1:
+        - sidplayo will no longer segfault if you don't specify the
+        full path to sidplay in .sidtoolsrc.  The bug was reported by
+	Goetz Waschk.
+
+News in 1.0:
+        - Nothing, but as it hasn't crashed since that last release,
+        it's probably pretty stable.
+
+News in 0.9.1:
+        - Bug fixes, see ChangeLog.
+
+News in 0.9.0:
+        - Nothing really, just updated the manual a bit and used the
+        programs without problems for several months, which indicates
+        it's quite stable, so this is meant as a 1.0pre version.  I'm
+        already working on the 1.x code, which is a complete rewrite.
+
+News in 0.5.3:
+        - Added a new config file format, using Yuuki NINOMIYA's
+	<gm@smn.enjoy.ne.jp> parsecfg. 
+        - Fixed getopt, so that it worked.
+	- sidplayo should now be able to kill sidplay on other
+	platforms than Linux now.  If they have a ps command that can
+	take the option -a.  That should make it work under Linux and
+	SunOS/Solaris anyway...
+	- sidtools compiles under SunOS 5.6 (or something like that
+	:-).  makelist and search2list are tested and work.  sidlist
+	shouldn't be a problem, and hopefully sidplayo also works.
+
+News in 0.5.2:
+        - Pressing ENTER should now work in all cases.
+	- sidlist is fixed to handle file names with weird characters
+	in them. 
+
+News in 0.5.1:
+        - Pressing ENTER should now work...
+
+News in 0.5.0:
+        - You can now skip to the next tune in the playlist (when
+	using sidlist) by pressing ENTER.
+
+News in 0.4.9:
+        - Bug fix: you can now play songs with all sorts of weird
+	characters in them.
+	- Long options in sidlist and search2list for everyone.
+	
+News in 0.4.8:
+        - Fixed a bug with --args, that meant that sidplayo would
+	choke on its input.
+	
+News in 0.4.7:
+        - sidlist now accepts the --args argument, which can be
+	handy.  Read the fine manual.
+        - Bug fixes.
+	
+News in 0.4.6:
+        - Bug fixes. 
+
+News in 0.4.5:
+        - The database format has been changed completely, so you
+	can't use a database created with an earlier version of
+	makelist.  The STIL info is now included in the database file,
+	which means searches with the --stil-information|-z option
+	are much faster.  makelist has been rewritten completely,
+	to make the process of creating this database fast.  The way
+	it's implemented means that makelist also needs a lot more
+	memory (about 2-3 MB).  search2list and sidlist have also been
+	rewritten to use the new database format.
+        - In sidlist you can now specify which database file to use
+	(with the -b or --database option).
+	- In makelist you can specify that you don't want the rc file
+	(.sidtoolsrc) to be written (with the -n or --no-rc option).
+	- You don't need to use any absolute paths with makelist
+	anymore. 
+
+News in 0.4.4:
+        - Should work under Solaris.  Well, maybe not...
+	- If sidtools is compiled without getopt, arguments to
+	search2list and sidlist can be given on the form "-tcommando"
+	_or_ "-t commando".
+	- You don't have to give the absolute path of the database
+	file as argument to makelist anymore.
+	- All init addresses should be correct in the database now.
+	- Bug fixes.  See ChangeLog for details.
+
+News in 0.4.3:
+        - You can now search for max and min values of play, init and
+	load addresses as well as default start tune.
+	- Usage messages from all the programs are now written to
+	stdout instead of stderr.  Seems to make sense.
+	- makelist now has a -h|--help argument.
+		
+News in 0.4.2:
+        - Just bug fixes.  See ChangeLog for details.
+
+News in 0.4.1:
+        - Fixed a bug in makelist, now the load address should be
+	correct in the database.
+	- More warnings from makelist for non-valid PSID files.
+	- makelist doesn't exit if it finds a non-valid PSID file,
+	instead it prints a warning.  If you see any of these
+	warnings, check the PSID file in question.
+
+News in 0.4.0:
+        - Bug fixes.  
+
+News in 0.3.9:
+        - makelist now also adds the HVSC root dir to the .sidtoolsrc.
+        - Added the --stil-information (or -z, intuitive, huh?) option
+	to search2list. 
+        - Added the --extra-information (or -e) option to
+	search2list.  It doesn't just output the paths to the sids
+	that match the search criteria, but also all the information
+	about them that's in the database (i.e. all the info from the
+	sid header).
+
+News in 0.3.8:
+        - Added support for giving more than one directory as argument
+	to makelist, in case you have your sids in several different
+	places. 
+	- Also tried to make makelist discover scrambled sids.
+	
+News in 0.3.7:
+        - Added long GNU-style command line arguments to sidlist and
+	search2list. 
+
+News in 0.3.6:
+        - Added search options for maximum and minimum file size and
+	subtune number. 
+
+News in 0.3.5:
+        - Code cleanup, security fixes.  No new features.
+
+News in 0.3.4:
+	- You can now use regular expressions in author, title and
+	copyright searches.
+	- Changed "Changes since <previous version>" to "News in
+	<current version>" in the NEWS file. :-)
+			
+Changes since v0.3.2p1:
+	- sidlist now shows which number the song being played has.
+	- The start tune choice in sidlist should actually work as
+	  expected now.  
+	- Removed sidzip and sidunzip.  No one needs them, as you can
+	  do the same thing with a very simple shell script or just
+	  the find command together with gzip or gunzip.
+	- Updated the documentation.
+
+Changes since v0.3.2:
+	- Fixed help text for search2list.
+
+Changes since v0.3.1:
+	- Added information about the database format to the
+	  documentation.
+	- Added the possibility to search the database for number of
+	  songs, default start song, load address, init address, play
+	  address and file size.  Nope, not any options that most
+	  people would use, but someone might find it useful.   
+
+Changes since v0.3.0:
+	- Added more info to the database created by makelist.  See
+	  the file src/makelist.c for details (in sidparse()).
+	- Started writing a ChangeLog, where implementation changes
+	  will go.  This file will only contain user visible changes.
+	- Added a new argument to sidlist, -d<seconds>, to set a delay
+	  between songs.  If the killing of sidplay is for some reason
+	  delayed (it is on my machine), you can set the delay between
+	  songs, so that it has time to get killed.  Try this argument
+	  with different numbers if you get error messages like
+	  "SIDPLAY: AUDIO: Could not open audio device".  Don't know
+	  if it's because there's something wrong with my sound
+	  configuration, but this fix works anyway.  I set it to 2
+	  seconds.  Default is 0.
+
+Changes since v0.2.5:
+	- Rewrote the documentation in texinfo format.
+	- Fixed autoconf and automake stuff, to simplify installation.
+
+Changes since v0.2.4:
+	- Cleaned up the code a bit.
+	- Fixed a stupid malloc() bug in makelist.c.
+
+Changes since v0.2.3:
+	- Added a little bit more comments to the code.  
+	- Rewrote search2list with strtok() instead of split(), so now
+	  I can throw that ugly split() code away.
+	- Added an rc file that keeps the path to the database file.
+	  This means you don't have to recompile to change it.  It is
+	  automatically created by makelist.  I might add more options
+	  to the rc file later.  BTW, it's called .sidtoolsrc.
+
+Changes since v0.2.2:
+	- Did a quick and dirty hack to be able to specify a start
+	  tune in a playlist. 
+	- Tidied up the argument parsing in sidlist.
+	- Did the same with search2list.
+    
+Changes since v0.2.1:
+	- Added the without_sidzip option to the Makefile.
+	- Added a few defines here and there, instead of hardcoding
+	  suffixes like ".gz", ".sid" etc.
+	- Fixed a small bug in sidlist, with the argument parsing.
+
+Changes since v.0.2.0:
+
+	- Rewrote sidzip.c, to use zlib, instead of calling gzip with
+	  system().  This should speed it up a bit.  It also means
+	  you'll need zlib to compile sidzip.
+	- Added the number of songs in the database to the top of the
+	  database file, to enable...
+	- ...random playlists in sidlist!  It's ugly, but it works.
+	  It also means that sidlist must know where your sid database
+	  is (the one you specify in sidtools.h).
+
+Changes since v.0.1.1:
+
+	- Fixed a very small bug (one character!) in zidplay, which 
+	  meant sidplayo killed the wrong process.
+	- Rewritten zidplay in C...
+	- And sidzip...  And merged sidunzip into it.
+	- And merged zidplay into sidplayo.
+	- Rewrote sidplayo a bit (removed kill_sidplayo()).
+	- Rewrote makelist in C and merged sidparse.c into it.
+	- Rewrote sidlist in C.
+
+Changes since v.0.1.0:
+
+	- Fixed a Makefile.
+	- Added support for command line arguments (for Sidplay).

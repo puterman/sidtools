@@ -1,0 +1,25 @@
+Things to do before 1.0:
+------------------------
+
+-
+
+Things to do after 1.0:
+-----------------------
+
+- Clean up the code in various ways.  Make it modular and independent
+  of user interface.
+- Make the search options for search2list more flexible?  Right now
+  you can't do a search for Hubbard as composer _or_ Hubbard as
+  title.  But that isn't really a problem, is it?
+- Keep working on the GTK+ frontend.  It sort of works right now, but
+  it's ugly and a lot of features are missing.  If you'd like to help
+  out, drop me a line.  It'll probably have to be rewritten from
+  scratch anyway, along with the rest of sidtools.
+- Add some signal handling to sidlist.  It responds in a very
+  unintuitive way to e.g. C-c and C-z right now.  Might have to
+  rewrite all the primitive system() stuff.
+- Fix up the kludgey src/Makefile.am and configure.in stuff.
+- Make it portable to all Unices out there (should be mostly configure
+  work).
+- Add more features?  Any suggestions?
+- Support for controlling sidlist over the network.

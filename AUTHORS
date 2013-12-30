@@ -1,0 +1,7 @@
+Linus Åkerlund <uxm165t@tninet.se> <liak5157@csd.uu.se>
+
+Borrowed code
+-------------
+Yuuki NINOMIYA <gm@smn.enjoy.ne.jp> wrote parsecfg.c and parsecfg.h.
+
+getopt.c, getopt.h and getopt1.c are part of the GNU C Library.

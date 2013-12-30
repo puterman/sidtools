@@ -1,0 +1,385 @@
+2001-05-02  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidplayo.c: Fixed bug in kill_sidplayo, that meant it would
+	segfault if you didn't specify the full path to sidplay in
+	.sidtoolsrc.
+
+2000-10-04  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* Ah, let's call it 1.0.
+
+2000-04-02  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.c: for some reason '@' wasn't the delimiter character in
+	play lists, but '{'.  Changed back to '@', so that I wouldn't have
+	to fix the documentation. :-)
+
+2000-03-20  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidplayo.c: fixed small bug in kill_sidplayo().  If you use an
+	absolute path in SIDPLAY= in the config file, it'll just compare
+	the ps output with the name of the actual binary.  Now it works on
+	_my_ system.  How do you make this thing portable?
+
+2000-03-17  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.c: print the file name while playing a playlist.
+
+2000-03-15  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: fixed config file related buffer overrun.  Should be
+	the last one...
+
+	* [sidplayo|makelist|search2list|sidlist].c: small fix in creating
+	path to config file.
+
+	* sidplayo.c: fixed config file related buffer overrun.
+
+2000-02-29  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* docs/sidtools.texinfo: polished up the manual a bit for the 0.9
+	release. 
+
+1999-11-30  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidtools.h: Added #defines for SEP (separator character for
+	database), STIL_SEP and STIL_SEP_CHAR, instead of hardcoding
+	them. 
+
+1999-11-29  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.c, search2list.c, makelist.c: substituted '{' for '@' as
+	separator character in the database file.
+
+1999-11-25  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.c: removed that ugly list stuff.
+
+	* sidlist.c, search2list.c, sidplayo.c: added support for both
+	system wide and local rc file.
+
+1999-11-13  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.[ch]: added support for both system wide and local rc
+	file. 
+
+	* sidtools.h: added #define for SYSTEM_RC_FILE.
+
+	* configure.in, Makefile.am: Added stuff to install the rc file.
+	
+
+1999-11-09  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* all programs: added cfgParse() calls to parse the new config
+	file. 
+
+	* parsecfg.[ch]: new files.
+
+1999-11-08  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* getopt1.c: new file, needed by getopt.c.
+
+	* sidplayo.c: reinserted the kill_sidplayo() function, as the
+	shell command killall does bad things on other Unix systems. 
+
+1999-11-05  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.c: fixed playwait().  Now it works.
+
+	* sidlist.c: fixed problems with special characters in file
+	names. 
+
+1999-10-27  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.[ch]: fixed bugs with playwait().  Disabled it when
+	reading playlists from stdin.  Don't ask me why that doesn't
+	work...
+	
+	* sidlist.[ch]: new function, playwait(), lets the user skip to
+	the next tune by pressing ENTER while playing.
+
+1999-10-23  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* getopt.[ch]: new files.
+
+	* search2list.c, sidlist.c: removed ugly argument parsing. 
+
+1999-10-18  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidplayo.c: added \" around the titles of the tunes, so that
+	characters that have a special meaning to the shell don't ruin
+	anything. 
+
+1999-10-09  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.c: Fixed stupid bug with --args... :-(
+
+	* sidlist.[ch]: added the --args argument.
+
+1999-09-19  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.c, search2list.c: Fixed usage of strtol().
+
+1999-09-18  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidplayo.c: corrected error behaviour if no psid file is given
+	on the command line (usage message is printed).
+
+1999-09-15  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidplayo.c: removed unnecessary output from system("killall...").
+
+1999-09-13  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: fixed a bug in get_full_path(), so that the returned
+	string never ends with a slash.
+
+	* sidplayo.c: removed kill_sidplayo().  Don't know why I didn't
+	just use system("killall sidplay") from the start instead...  This
+	should work just as well, maybe better.  Unless killall means
+	other things on other Unices than Linux...
+
+1999-07-22  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: minor help text correction.
+
+1999-07-19  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: bug fix: The first argument was always used as HVSC
+	base dir.  Fixed.
+
+1999-07-18  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* Started writing a GTK GUI version of search2list.
+
+1999-07-16  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: with -h it didn't exit after usage().  Fixed.
+
+1999-07-13  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: optimized the stil/sid merge (make_db()) a bit.  I'd
+	say it runs at an acceptable speed...
+
+	* sidlist.c: fixed parsing of new database for random play.
+
+	* search2list.c: rewrote it to use the new database format.
+
+	* makelist.c: rewrote it to not use temp files and to add the STIL
+	info to the database.  
+
+1999-07-07  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.c: added -h option to the code that's used if getopt.h
+	isn't present.
+
+1999-07-06  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.c: added -b|--database option, so that you can play
+	random tunes from different database files.
+
+	* makelist.c: -n|--norc option added.
+
+1999-07-05  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: added get_full_path().  You should now be able to
+	give relative paths as argument to makelist.
+
+1999-07-03  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.c: same thing with argument parsing as search2list.c.
+
+	* search2list.c: fixed the argument parsing that is used if getopt
+	isn't available so that you can now choose if you want to type
+	e.g. "-tcommando" or "-t commando".
+
+1999-06-30  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: sidparse(): when the init address is set to 0, it is
+	equal to the load address.  
+
+	* search2list.[ch]: expanded struct bounds to fix a small bug: if
+	you tried to do a search for a value that was 0, the search
+	routine would fail.
+
+1999-06-29  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: the absolute path to the database file should now
+	always be put in .sidtoolsrc.
+
+	* sidplayo.c: fixed usage message.
+
+1999-06-28  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: added -h and --help options.
+
+	* search2list.c, makelist.c, sidlist.c, sidplayo.c: --help message
+	is printed to stdout instead of stderr.
+
+	* search2list.c: added maximum and minimum value searches for
+	play, init and load addresses and start song number.
+	
+1999-06-18  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.c: cleaned up the code a bit.
+
+1999-06-16  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: fixed bug that always set the number of files in the
+	database to 0 (return value of sidparse wasn't 0).
+
+	* search2list.c: removed unnecessary newline at end of output.
+
+	* sidlist.c: fixed EOF check (return value of fgets), so now the
+	last song in a playlist is only played once.
+
+	* makelist.c: fixed EOF check (return value of fgets) in
+	make_db().
+	
+	* sidlist.c: fixed random play so that also the last tune in the
+	database may get played.
+
+1999-06-08  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: added return value for sidparse().  Print out
+	warnings for non-valid PSID files (too short files, non-valid
+	headers etc.), instead of exiting with an error message.  Maybe I
+	should add a switch for this, to let the user choose the error
+	behaviour. 
+
+1999-06-05  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidtools.texinfo: updated version number (tend to forget that).
+	
+1999-06-04  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: bugfix: only loaded 124 bytes of each sid, which
+	meant I missed the load address (offset 124 and 125).
+
+1999-05-26  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.c: Fixed the bug with the start song when using a
+	directory as a playlist. 
+
+1999-05-20  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* Changed ps parsing in sidplayo.c a little bit.
+
+1999-05-08  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* search2list.c, makelist.c, sidlist.c: added checks for NULL
+	return value for all malloc()s. 
+
+1999-05-04  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* search2list.[ch]: Added STIL search as well.  Slow and ugly, but
+	sort of works.  Should try to decipher Tomten's perl code to see
+	how he fixes his database...
+
+	* makelist.c: HVSC root dir is added to .sidtoolsrc.
+
+1999-04-28  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidlist.c, sidplayo.c: changed the output a bit, so that the
+	path to the current song is always shown.
+
+1999-04-25  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* search2list.c: added the --extra-information (or -e) option,
+	which gives you all the information available in the database
+	about the tunes that match the search criteria.
+
+1999-04-23  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* sidtools.texinfo: fixed some things that looked bad.
+
+1999-04-20  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: Tried to make it aware of corrupt sid files.  It'll
+	exit if it finds an error, which may not be funny, as the program
+	may take a few minutes to run, but I thought that was the best
+	solution anyway.
+
+1999-04-17  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* makelist.c: Added support for scanning several directory
+	structures.
+
+1999-04-06  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* search2list.[ch]: added long options.
+
+	* sidlist.[ch]: added long options.
+
+	* Added --help switch to sidplayo, sidlist and search2list.
+
+1999-03-17  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* search2list.c: added maxnumber and minnumber (of songs) as
+	search options (-n- and -n+, e.g. "search2list -n-15" will give
+	you a list of all songs with at least 15 subtunes).
+
+	* search2list.c: added maxsize and minsize as search options (-z-
+	and -z+, might be a bit awkward, but couldn't come up with
+	anything better).
+
+1999-03-16  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* search2list.c: removed possible string overflows.
+
+	* sidlist.c: removed possible string overflows.
+
+	* sidplayo.c: removed possible string overflows.
+
+1999-03-14  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* Removed possible string overflows in makelist.c.
+
+1999-03-12  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* search2list.c: regexp support for title, author and copyright
+	fields. 
+
+1999-02-17  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* Removed everything that has to do with sidzip.  It was a stupid
+	idea anyway, and can be done better with a shell script or just
+	the find command combined with gzip or gunzip.
+
+	* Tried to clean up the mess in sidlist, but the handling of the
+	start tune still doesn't look very nice.  It should work, though.
+	
+1999-02-09  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* Fixed things with the number of the song shown and the chosen
+	start song, it was a bit weird.  Now it should work better.
+	Doesn't look very nice, though. :-)
+
+	* Added a few lines to sidlist.c to make it show which number the
+	current song has (relative to the beginning of the list).
+
+1999-02-02  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* Fixed a memory allocation bug with the command line arguments in
+	search2list which meant the last character in every argument was
+	ignored.
+
+1999-01-31  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* Added information about the database format to the
+	documentation.
+	
+	* Added support for searching the fields that contain number of
+	songs, start song, init address, load address, play address and
+	file size.  This is hardcore...
+
+1999-01-15  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* Added a \n in search2list, so that the whole list didn't turn up
+	on one single line.
+
+1999-01-14  Linus 흆erlund  <uxm165t@tninet.se>
+
+	* Added a few lines to sidlist.c to put in a delay between songs.
+	system("sidplayo") is run, then it sleeps for the chosen number of
+	seconds, then then next song is played as usual.
